@@ -5,6 +5,7 @@
 
 ## 1. 기본형 설치
 
+
 ```bash
 npm i @nivo/core --force
 ```
