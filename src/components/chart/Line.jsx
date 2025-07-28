@@ -1,27 +1,26 @@
-import React, { useEffect, useState } from "react";
 import { ResponsiveLine } from "@nivo/line";
-import { lineData } from "../../apis/line_data";
+import { useEffect, useState } from "react";
 
 function Line() {
-  // js 자리
   const [data, setData] = useState([]);
-  // 데이터 부르는 함수 만들기
-  const getData = async () => {
+
+  // JSON 파일에서 fetch
+  const fetchDataFromJson = async () => {
     try {
-      // fetch 를 이용한 데이터 호출
       const res = await fetch("/line_data.json");
       const json = await res.json();
-      // 데이터 갱신
       setData(json);
+      console.log("📂 외부 JSON 데이터 로드됨");
     } catch (error) {
-      console.log(error);
+      console.error("🚨 fetch 에러:", error);
     }
   };
-  // 로컬스토리지에 데이터 저장하기
+
+  // localStorage 저장 함수
   const saveData = () => {
     const tempData = [
       {
-        id: "point1",
+        id: "감정기록",
         data: [
           { x: "좋음", y: 5 },
           { x: "치킨", y: 78 },
@@ -38,20 +37,32 @@ function Line() {
         ],
       },
     ];
-    const jsData = JSON.stringify(tempData);
-    localStorage.setItem("line_data", jsData);
+    localStorage.setItem("line_data", JSON.stringify(tempData));
+    alert("✅ 로컬스토리지에 저장 완료!");
   };
 
+  // 로컬스토리지 또는 JSON 데이터 불러오기
   useEffect(() => {
-    getData();
+    const localData = localStorage.getItem("line_data");
+    if (localData) {
+      try {
+        const parsed = JSON.parse(localData);
+        setData(parsed);
+        console.log("📦 로컬 데이터 불러옴");
+      } catch (e) {
+        console.error("JSON 파싱 에러:", e);
+      }
+    } else {
+      fetchDataFromJson(); // 로컬에 없으면 json에서 불러오기
+    }
   }, []);
-  // jsx 자리
+
   return (
     <div>
-      <h1>Line 차트 예제</h1>
-      <button onClick={saveData}>localstorage 저장하기</button>
+      <h1>📈 Line 차트 예제</h1>
+      <button onClick={saveData}>📥 localStorage에 저장하기</button>
       <div style={{ width: "100%", height: 600 }}>
-        <ResponsiveLine /* or Line for fixed dimensions */
+        <ResponsiveLine
           data={data}
           margin={{ top: 50, right: 110, bottom: 50, left: 60 }}
           yScale={{
@@ -61,8 +72,8 @@ function Line() {
             stacked: true,
             reverse: false,
           }}
-          axisBottom={{ legend: "transportation", legendOffset: 36 }}
-          axisLeft={{ legend: "count", legendOffset: -40 }}
+          axisBottom={{ legend: "감정", legendOffset: 36 }}
+          axisLeft={{ legend: "수치", legendOffset: -40 }}
           pointSize={10}
           pointColor={{ theme: "background" }}
           pointBorderWidth={2}
