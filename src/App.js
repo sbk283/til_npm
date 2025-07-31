@@ -1,12 +1,15 @@
-import CounterAtom from "./components/CounterAtom";
-import TodoList from "./components/TodoList";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import After from "./pages/member/After";
 
 function App() {
   return (
-    <div>
-      <CounterAtom />
-      <TodoList />
-    </div>
+    <Router>
+      <LoginPage></LoginPage>
+      <Routes>
+        <Route path="/member/kakao" element={<After />}></Route>
+      </Routes>
+    </Router>
   );
 }
 
