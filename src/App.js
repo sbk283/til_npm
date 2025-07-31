@@ -1,11 +1,11 @@
-import Header from "./components/layout/Header";
-import JoinPage from "./pages/JoinPage";
+import CounterAtom from "./components/CounterAtom";
+import TodoList from "./components/TodoList";
 
 function App() {
   return (
     <div>
-      <Header />
-      <JoinPage />
+      <CounterAtom />
+      <TodoList />
     </div>
   );
 }

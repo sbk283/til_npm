@@ -34,14 +34,7 @@ function PwForm() {
             name={"password"}
             label="비밀번호"
             required={true}
-            rules={[
-              { required: true, message: "비밀번호는 필수항목입니다." },
-              {
-                pattern:
-                  /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()\-_=+\[\]{};:'",.<>/?\\|`~])[A-Za-z\d!@#$%^&*()\-_=+\[\]{};:'",.<>/?\\|`~]{8,}$/,
-                message: "비밀번호 형식에 맞지 않습니다.",
-              },
-            ]}
+            rules={[{ required: true, message: "비밀번호는 필수항목입니다." }]}
           >
             <Input.Password
               placeholder="비밀번호를 입력하시오."

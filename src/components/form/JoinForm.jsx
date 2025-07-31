@@ -15,8 +15,8 @@ function JoinForm() {
   // 5. 필수값 안내 매시지 표시하기
   // 6. 각 필드의 입력중인 값 알아내기
   const onFieldsChange = (field, allFields) => {
-    // console.log("Changed field:", field[0].value);
-    // console.log("All fields:", allFields);
+    console.log("Changed field:", field[0].value);
+    console.log("All fields:", allFields);
   };
   // 7. 확인 버튼 선택시 최종 입력값
   const onFinish = value => {
