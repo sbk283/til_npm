@@ -1,8 +1,7 @@
-import js from "@eslint/js";
-import pluginReact from "eslint-plugin-react";
 import pluginPrettier from "eslint-plugin-prettier";
-import globals from "globals";
+import pluginReact from "eslint-plugin-react";
 import { defineConfig } from "eslint/config";
+import globals from "globals";
 
 export default defineConfig([
   {

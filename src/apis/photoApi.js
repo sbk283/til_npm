@@ -6,6 +6,7 @@ const getPhotos = async () => {
   try {
     const res = await axios.get(photoURL);
     console.log(res.data);
+    return res.data;
   } catch (error) {
     console.log(error);
   }
